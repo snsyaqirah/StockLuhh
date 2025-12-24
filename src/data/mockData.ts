@@ -1,4 +1,4 @@
-import { InventoryItem } from '@/types/inventory';
+import { InventoryItem, WishlistItem, TravelKit } from '@/types/inventory';
 
 export const mockInventory: InventoryItem[] = [
   {
@@ -14,6 +14,8 @@ export const mockInventory: InventoryItem[] = [
     purchaseDate: '2024-11-15',
     openedDate: '2024-11-20',
     expiryDate: '2025-11-15',
+    isTravelEssential: true,
+    travelQuantity: 1,
   },
   {
     id: '2',
@@ -26,6 +28,8 @@ export const mockInventory: InventoryItem[] = [
     size: '150g',
     price: 12.50,
     purchaseDate: '2024-10-01',
+    isTravelEssential: true,
+    travelQuantity: 1,
   },
   {
     id: '3',
@@ -39,6 +43,8 @@ export const mockInventory: InventoryItem[] = [
     price: 28.90,
     purchaseDate: '2024-12-01',
     expiryDate: '2026-12-01',
+    isTravelEssential: true,
+    travelQuantity: 1,
   },
   {
     id: '4',
@@ -52,6 +58,8 @@ export const mockInventory: InventoryItem[] = [
     price: 18.90,
     purchaseDate: '2024-09-15',
     openedDate: '2024-09-20',
+    isTravelEssential: true,
+    travelQuantity: 1,
   },
   {
     id: '5',
@@ -65,7 +73,9 @@ export const mockInventory: InventoryItem[] = [
     price: 35.00,
     purchaseDate: '2024-11-01',
     openedDate: '2024-11-05',
-    expiryDate: '2025-03-01',
+    expiryDate: '2025-01-15',
+    isTravelEssential: true,
+    travelQuantity: 1,
   },
   {
     id: '6',
@@ -128,6 +138,57 @@ export const mockInventory: InventoryItem[] = [
     price: 8.90,
     purchaseDate: '2024-10-15',
     expiryDate: '2026-10-15',
+    isTravelEssential: true,
+    travelQuantity: 1,
+  },
+];
+
+export const mockWishlist: WishlistItem[] = [
+  {
+    id: 'w1',
+    name: 'CeraVe Moisturizing Cream',
+    brand: 'CeraVe',
+    category: 'skincare',
+    estimatedPrice: 55.00,
+    priority: 'high',
+    notes: 'Heard great reviews about this for dry skin',
+    addedDate: '2024-12-01',
+    rating: 4,
+  },
+  {
+    id: 'w2',
+    name: 'Olaplex Hair Treatment',
+    brand: 'Olaplex',
+    category: 'haircare',
+    estimatedPrice: 120.00,
+    priority: 'medium',
+    notes: 'Want to try for damaged hair repair',
+    addedDate: '2024-12-10',
+  },
+  {
+    id: 'w3',
+    name: 'Bamboo Toothbrush Set',
+    brand: 'Eco-Friendly',
+    category: 'dental',
+    estimatedPrice: 15.00,
+    priority: 'low',
+    notes: 'Trying to be more sustainable',
+    addedDate: '2024-12-15',
+  },
+];
+
+export const mockTravelKits: TravelKit[] = [
+  {
+    id: 'tk1',
+    name: 'Weekend Getaway',
+    createdDate: '2024-12-01',
+    tripDate: '2025-01-15',
+    destination: 'Beach Resort',
+    items: [
+      { itemId: '1', itemName: 'Cetaphil Gentle Cleanser', category: 'skincare', quantity: 1, packed: false },
+      { itemId: '2', itemName: 'Colgate Total Toothpaste', category: 'dental', quantity: 1, packed: false },
+      { itemId: '5', itemName: 'Sunscreen SPF50', category: 'skincare', quantity: 1, packed: false },
+    ],
   },
 ];
 
@@ -165,4 +226,8 @@ export const getExpiringItems = (daysAhead: number = 30) => {
     const expiry = new Date(item.expiryDate);
     return expiry <= futureDate && expiry >= today;
   });
+};
+
+export const getTravelEssentials = () => {
+  return mockInventory.filter(item => item.isTravelEssential);
 };

@@ -27,6 +27,50 @@ export interface InventoryItem {
   expiryDate?: string;
   notes?: string;
   imageUrl?: string;
+  // Travel mode
+  isTravelEssential?: boolean;
+  travelQuantity?: number;
+  // Usage tracking
+  usageHistory?: UsageRecord[];
+  averageLifespanDays?: number;
+}
+
+export interface UsageRecord {
+  id: string;
+  action: 'opened' | 'finished' | 'restocked';
+  date: string;
+  quantity?: number;
+  notes?: string;
+}
+
+export interface WishlistItem {
+  id: string;
+  name: string;
+  brand?: string;
+  category: ItemCategory;
+  estimatedPrice?: number;
+  priority: 'low' | 'medium' | 'high';
+  notes?: string;
+  addedDate: string;
+  productUrl?: string;
+  rating?: number; // 1-5 stars for current product comparison
+}
+
+export interface TravelKit {
+  id: string;
+  name: string;
+  items: TravelKitItem[];
+  createdDate: string;
+  tripDate?: string;
+  destination?: string;
+}
+
+export interface TravelKitItem {
+  itemId: string;
+  itemName: string;
+  category: ItemCategory;
+  quantity: number;
+  packed: boolean;
 }
 
 export interface CategoryInfo {
@@ -54,4 +98,10 @@ export const STATUS_CONFIG = {
   'in-use': { label: 'In Use', color: 'bg-stock-good', textColor: 'text-stock-good' },
   'low': { label: 'Running Low', color: 'bg-stock-low', textColor: 'text-stock-low' },
   'finished': { label: 'Finished', color: 'bg-stock-empty', textColor: 'text-stock-empty' },
+};
+
+export const PRIORITY_CONFIG = {
+  'low': { label: 'Low', color: 'bg-muted text-muted-foreground' },
+  'medium': { label: 'Medium', color: 'bg-stock-low/15 text-stock-low' },
+  'high': { label: 'High', color: 'bg-stock-empty/15 text-stock-empty' },
 };

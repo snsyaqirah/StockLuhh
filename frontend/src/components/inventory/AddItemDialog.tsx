@@ -29,7 +29,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     onAdd({
       name: formData.name,
       brand: formData.brand || undefined,
@@ -42,7 +42,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
       expiryDate: formData.expiryDate || undefined,
       purchaseDate: new Date().toISOString().split('T')[0],
     });
-    
+
     setFormData({
       name: '',
       brand: '',
@@ -71,7 +71,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
         <DialogHeader>
           <DialogTitle>Add New Item</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4 pt-4">
           <div className="space-y-2">
             <Label htmlFor="name">Item Name *</Label>
@@ -83,7 +83,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
               required
             />
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="brand">Brand</Label>
             <Input
@@ -93,13 +93,42 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
               placeholder="e.g., Cetaphil"
             />
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Category *</Label>
-              <Select 
-                value={formData.category} 
-                onValueChange={(v) => setFormData({ ...formData, category: v as ItemCategory })}
+              <Select
+                value={formData.category}
+                onValueChange={(v) => {
+                  const category = v as ItemCategory;
+                  // Smart defaults based on category
+                  const expiryDays: Record<ItemCategory, number> = {
+                    grocery: 7,
+                    snacks: 30,
+                    beverages: 14,
+                    medicine: 365,
+                    toiletries: 180,
+                    skincare: 180,
+                    haircare: 180,
+                    dental: 180,
+                    cleaning: 365,
+                    other: 0,
+                  };
+
+                  // Calculate default expiry date
+                  let defaultExpiry = formData.expiryDate;
+                  if (!formData.expiryDate && expiryDays[category] > 0) {
+                    const date = new Date();
+                    date.setDate(date.getDate() + expiryDays[category]);
+                    defaultExpiry = date.toISOString().split('T')[0];
+                  }
+
+                  setFormData({
+                    ...formData,
+                    category,
+                    expiryDate: defaultExpiry,
+                  });
+                }}
               >
                 <SelectTrigger>
                   <SelectValue />
@@ -116,11 +145,11 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="space-y-2">
               <Label>Status</Label>
-              <Select 
-                value={formData.status} 
+              <Select
+                value={formData.status}
                 onValueChange={(v) => setFormData({ ...formData, status: v as ItemStatus })}
               >
                 <SelectTrigger>
@@ -135,7 +164,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
               </Select>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="quantity">Quantity *</Label>
@@ -147,7 +176,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
                 onChange={(e) => setFormData({ ...formData, quantity: parseInt(e.target.value) || 0 })}
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="minQuantity">Low Stock Alert</Label>
               <Input
@@ -159,7 +188,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
               />
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="size">Size</Label>
@@ -170,7 +199,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
                 placeholder="e.g., 500ml"
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="price">Price (RM)</Label>
               <Input
@@ -184,7 +213,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
               />
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="expiryDate">Expiry Date</Label>
             <Input
@@ -194,7 +223,7 @@ export function AddItemDialog({ onAdd, trigger }: AddItemDialogProps) {
               onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
             />
           </div>
-          
+
           <div className="flex gap-3 pt-4">
             <Button type="button" variant="outline" className="flex-1" onClick={() => setOpen(false)}>
               Cancel

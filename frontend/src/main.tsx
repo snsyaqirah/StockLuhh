@@ -7,6 +7,17 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import { registerSW } from 'virtual:pwa-register';
+
+// Register Service Worker for PWA
+registerSW({
+    onNeedRefresh() {
+        console.log('New content available');
+    },
+    onOfflineReady() {
+        console.log('App ready for offline usage');
+    },
+});
 
 // Mount the app
 const root = document.getElementById('root');
@@ -18,11 +29,3 @@ createRoot(root).render(
     </StrictMode>
 );
 
-// Register service worker for PWA
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch((error) => {
-            console.log('SW registration failed:', error);
-        });
-    });
-}

@@ -37,6 +37,68 @@ export function useInventory() {
     });
   }, [setItems]);
 
+  const batchUpdateItems = useCallback((updates: { id: string, changes: Partial<InventoryItem> }[]) => {
+    setItems((prev) =>
+      prev.map((item) => {
+        const update = updates.find((u) => u.id === item.id);
+        return update ? { ...item, ...update.changes } : item;
+      })
+    );
+    toast({
+      title: "Items Updated",
+      description: `${updates.length} items have been updated.`,
+    });
+  }, [setItems]);
+
+  // One-tap usage logging
+  const logUsage = useCallback((id: string, type: 'once' | 'half' | 'daily' | 'finished') => {
+    setItems((prev) => prev.map((item) => {
+      if (item.id !== id) return item;
+
+      const now = new Date().toISOString();
+      const usageRecord = { id: Date.now().toString(), action: type, date: now, quantityUsed: type === 'half' ? 0.5 : 1 };
+      const newHistory = [...(item.usageHistory || []), usageRecord] as typeof item.usageHistory;
+
+      // Calculate new quantity
+      let newQuantity = item.quantity;
+      let newStatus = item.status;
+
+      if (type === 'finished') {
+        newQuantity = 0;
+        newStatus = 'finished';
+      } else if (type === 'half') {
+        newQuantity = Math.max(0, item.quantity - 0.5);
+        if (newQuantity <= item.minQuantity) newStatus = 'low';
+      } else if (type === 'once') {
+        newQuantity = Math.max(0, item.quantity - 1);
+        if (newQuantity === 0) newStatus = 'finished';
+        else if (newQuantity <= item.minQuantity) newStatus = 'low';
+      }
+      // 'daily' just logs without changing quantity
+
+      // Calculate average lifespan from usage history
+      let avgLifespan = item.averageLifespanDays;
+      if (newHistory.length >= 2 && item.openedDate) {
+        const opened = new Date(item.openedDate).getTime();
+        const lastUsed = new Date(newHistory[newHistory.length - 1].date).getTime();
+        const daysSinceOpened = Math.max(1, Math.round((lastUsed - opened) / (1000 * 60 * 60 * 24)));
+        avgLifespan = Math.round(daysSinceOpened / newHistory.length * item.quantity);
+      }
+
+      return {
+        ...item,
+        quantity: newQuantity,
+        status: newStatus,
+        usageHistory: newHistory,
+        averageLifespanDays: avgLifespan,
+        openedDate: item.openedDate || (type !== 'daily' ? now.split('T')[0] : item.openedDate),
+      };
+    }));
+
+    const labels = { once: 'Used once', half: 'Used half', daily: 'Logged daily use', finished: 'Marked finished' };
+    toast({ title: labels[type], description: 'Usage recorded ✓' });
+  }, [setItems]);
+
   const deleteItem = useCallback((id: string) => {
     setItems((prev) => {
       const deletedItem = prev.find((item) => item.id === id);
@@ -200,7 +262,7 @@ export function useInventory() {
   const expiringItems = useMemo(() => {
     const today = new Date();
     const thirtyDaysLater = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
-    
+
     return items.filter((item) => {
       if (!item.expiryDate) return false;
       const expiry = new Date(item.expiryDate);
@@ -258,7 +320,9 @@ export function useInventory() {
     items,
     addItem,
     updateItem,
+    batchUpdateItems,
     deleteItem,
+    logUsage,
     getItemsByCategory,
     lowStockItems,
     expiringItems,
@@ -268,14 +332,14 @@ export function useInventory() {
     spendingByCategory,
     undoLastAction,
     canUndo: undoStack.length > 0,
-    
+
     // Wishlist
     wishlist,
     addToWishlist,
     updateWishlistItem,
     removeFromWishlist,
     moveWishlistToInventory,
-    
+
     // Travel Kits
     travelKits,
     createTravelKit,

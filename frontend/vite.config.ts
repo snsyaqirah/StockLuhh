@@ -65,14 +65,7 @@ export default defineConfig(({ mode }) => ({
             purpose: "apple touch icon",
           },
         ],
-        screenshots: [
-          {
-            src: "/screenshots/dashboard.png",
-            sizes: "1280x720",
-            type: "image/png",
-            label: "Dashboard showing inventory overview",
-          },
-        ],
+
         shortcuts: [
           {
             name: "Add Item",
@@ -92,8 +85,8 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2,woff}"],
-        // Offline fallback
-        navigateFallback: "/offline.html",
+        // Offline fallback - use index.html for SPA to work offline
+        navigateFallback: "/index.html",
         navigateFallbackDenylist: [/^\/api\//],
         // Runtime caching strategies
         runtimeCaching: [

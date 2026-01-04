@@ -1,4 +1,4 @@
-import { Plus, ShoppingCart, Bell, Package } from 'lucide-react';
+import { Plus, ShoppingCart, Package, Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { AddItemDialog } from '@/components/inventory/AddItemDialog';
@@ -15,7 +15,7 @@ export function QuickActions({ onAddItem, lowStockCount }: QuickActionsProps) {
     <Card className="p-4 gradient-card shadow-card border border-border/50">
       <h3 className="font-semibold mb-3">Quick Actions</h3>
       <div className="grid grid-cols-2 gap-2">
-        <AddItemDialog 
+        <AddItemDialog
           onAdd={onAddItem}
           trigger={
             <Button variant="outline" className="h-auto py-3 flex-col gap-1.5 w-full">
@@ -24,7 +24,7 @@ export function QuickActions({ onAddItem, lowStockCount }: QuickActionsProps) {
             </Button>
           }
         />
-        
+
         <Link to="/shopping">
           <Button variant="outline" className="h-auto py-3 flex-col gap-1.5 w-full relative">
             <ShoppingCart className="h-5 w-5" />
@@ -36,18 +36,20 @@ export function QuickActions({ onAddItem, lowStockCount }: QuickActionsProps) {
             )}
           </Button>
         </Link>
-        
+
         <Link to="/inventory">
           <Button variant="outline" className="h-auto py-3 flex-col gap-1.5 w-full">
             <Package className="h-5 w-5" />
             <span className="text-xs">Inventory</span>
           </Button>
         </Link>
-        
-        <Button variant="outline" className="h-auto py-3 flex-col gap-1.5">
-          <Bell className="h-5 w-5" />
-          <span className="text-xs">Reminders</span>
-        </Button>
+
+        <Link to="/travel">
+          <Button variant="outline" className="h-auto py-3 flex-col gap-1.5 w-full">
+            <Plane className="h-5 w-5" />
+            <span className="text-xs">Travel</span>
+          </Button>
+        </Link>
       </div>
     </Card>
   );

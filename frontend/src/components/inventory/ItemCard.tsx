@@ -3,14 +3,14 @@ import { StatusBadge } from './StatusBadge';
 import { CategoryIcon } from './CategoryIcon';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, Calendar, DollarSign, Edit, Trash2, Plane, Minus, Plus } from 'lucide-react';
+import { MoreHorizontal, Calendar, DollarSign, Edit, Trash2, Plane, Minus, Plus, Circle, CircleDot, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format, differenceInDays } from 'date-fns';
 
@@ -19,21 +19,25 @@ interface ItemCardProps {
   onEdit?: (item: InventoryItem) => void;
   onDelete?: (item: InventoryItem) => void;
   onUpdateQuantity?: (id: string, delta: number) => void;
+  onLogUsage?: (id: string, type: 'once' | 'half' | 'daily' | 'finished') => void;
   className?: string;
   showActions?: boolean;
+  showUsageButtons?: boolean;
 }
 
-export function ItemCard({ 
-  item, 
-  onEdit, 
-  onDelete, 
+export function ItemCard({
+  item,
+  onEdit,
+  onDelete,
   onUpdateQuantity,
+  onLogUsage,
   className,
-  showActions = true 
+  showActions = true,
+  showUsageButtons = false,
 }: ItemCardProps) {
   const isExpiringSoon = item.expiryDate && differenceInDays(new Date(item.expiryDate), new Date()) <= 30;
   const isExpired = item.expiryDate && new Date(item.expiryDate) < new Date();
-  
+
   return (
     <Card className={cn(
       "p-4 gradient-card shadow-card hover:shadow-elevated transition-all duration-200 group",
@@ -43,7 +47,7 @@ export function ItemCard({
     )}>
       <div className="flex items-start gap-3">
         <CategoryIcon category={item.category} size="lg" />
-        
+
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
@@ -52,7 +56,7 @@ export function ItemCard({
                 <p className="text-sm text-muted-foreground truncate">{item.brand}</p>
               )}
             </div>
-            
+
             {showActions && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -76,7 +80,7 @@ export function ItemCard({
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem 
+                  <DropdownMenuItem
                     onClick={() => onDelete?.(item)}
                     className="text-destructive focus:text-destructive"
                   >
@@ -87,17 +91,17 @@ export function ItemCard({
               </DropdownMenu>
             )}
           </div>
-          
+
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <StatusBadge status={item.status} />
-            
+
             {item.isTravelEssential && (
               <span className="inline-flex items-center gap-1 text-xs bg-accent/15 text-accent px-2 py-0.5 rounded-full">
                 <Plane className="h-3 w-3" />
                 Travel
               </span>
             )}
-            
+
             {isExpired && (
               <span className="inline-flex items-center gap-1 text-xs bg-stock-expired/15 text-stock-expired px-2 py-0.5 rounded-full font-medium">
                 Expired
@@ -129,20 +133,53 @@ export function ItemCard({
                 </Button>
               </div>
             )}
-            
+
             {!onUpdateQuantity && (
               <span className="text-sm text-muted-foreground">
                 Qty: <span className="font-medium text-foreground">{item.quantity}</span>
               </span>
             )}
-            
+
             {item.size && (
               <span className="text-sm text-muted-foreground">
                 • {item.size}
               </span>
             )}
           </div>
-          
+
+          {/* One-Tap Usage Tracking Buttons */}
+          {showUsageButtons && onLogUsage && item.status !== 'finished' && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 px-2.5 text-xs gap-1.5 hover:bg-primary/10 hover:border-primary"
+                onClick={() => onLogUsage(item.id, 'once')}
+              >
+                <Circle className="h-3 w-3" />
+                Used Once
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 px-2.5 text-xs gap-1.5 hover:bg-amber-500/10 hover:border-amber-500"
+                onClick={() => onLogUsage(item.id, 'half')}
+              >
+                <CircleDot className="h-3 w-3" />
+                Half
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 px-2.5 text-xs gap-1.5 hover:bg-stock-expired/10 hover:border-stock-expired text-stock-low"
+                onClick={() => onLogUsage(item.id, 'finished')}
+              >
+                <CheckCircle className="h-3 w-3" />
+                Finished
+              </Button>
+            </div>
+          )}
+
           <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
             {item.price && (
               <span className="flex items-center gap-1">
@@ -150,7 +187,7 @@ export function ItemCard({
                 RM{item.price.toFixed(2)}
               </span>
             )}
-            
+
             {item.expiryDate && (
               <span className={cn(
                 "flex items-center gap-1",

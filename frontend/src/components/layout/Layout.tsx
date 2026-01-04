@@ -6,7 +6,7 @@
 import { ReactNode } from 'react';
 import { Header } from './Header';
 import { BottomNav } from './BottomNav';
-import { OfflineBanner, InstallBanner, UpdateBanner } from '@/components/common';
+import { OfflineBanner, InstallBanner, UpdateBanner, FAB } from '@/components/common';
 import { cn } from '@/lib/utils';
 import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 
@@ -49,6 +49,9 @@ export function Layout({ children, hideBottomNav = false, className }: LayoutPro
 
       {/* Install prompt (after a delay) */}
       <InstallBanner />
+
+      {/* Floating Action Button (mobile) */}
+      <FAB />
     </div>
   );
 }

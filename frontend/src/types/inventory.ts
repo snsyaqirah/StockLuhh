@@ -1,6 +1,6 @@
 export type ItemStatus = 'new' | 'in-use' | 'low' | 'finished';
 
-export type ItemCategory = 
+export type ItemCategory =
   | 'toiletries'
   | 'skincare'
   | 'haircare'
@@ -37,9 +37,10 @@ export interface InventoryItem {
 
 export interface UsageRecord {
   id: string;
-  action: 'opened' | 'finished' | 'restocked';
+  action: 'opened' | 'finished' | 'restocked' | 'once' | 'half' | 'daily';
   date: string;
   quantity?: number;
+  quantityUsed?: number;
   notes?: string;
 }
 

@@ -6,14 +6,16 @@ import { RecentItems } from '@/components/dashboard/RecentItems';
 import { SpendingChart } from '@/components/charts/SpendingChart';
 import { useInventory } from '@/hooks/useInventory';
 
+import { SmartSuggestions } from '@/components/dashboard/SmartSuggestions';
+
 const Index = () => {
-  const { 
-    items, 
-    addItem, 
-    stats, 
-    lowStockItems, 
+  const {
+    items,
+    addItem,
+    stats,
+    lowStockItems,
     expiringItems,
-    spendingByCategory 
+    spendingByCategory
   } = useInventory();
 
   return (
@@ -62,6 +64,7 @@ const Index = () => {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column - Charts & Quick Actions */}
           <div className="space-y-6">
+            <SmartSuggestions items={items} />
             <QuickActions onAddItem={addItem} lowStockCount={lowStockItems.length} />
             <SpendingChart data={spendingByCategory} />
           </div>
@@ -74,12 +77,12 @@ const Index = () => {
               emptyMessage="All items are well-stocked!"
               viewAllLink="/shopping"
             />
-            
+
             <RecentItems
               items={expiringItems}
               title="Expiring Soon"
               emptyMessage="No items expiring in the next 30 days"
-              viewAllLink="/inventory"
+              viewAllLink="/expiry"
             />
           </div>
         </div>

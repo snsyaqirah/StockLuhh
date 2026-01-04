@@ -2,6 +2,7 @@ import { Layout } from '@/components/layout/Layout';
 import { useInventory } from '@/hooks/useInventory';
 import { Card } from '@/components/ui/card';
 import { SpendingChart } from '@/components/charts/SpendingChart';
+import { MonthlyStockReport } from '@/components/dashboard/MonthlyReport';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { STATUS_CONFIG } from '@/types/inventory';
 
@@ -40,6 +41,9 @@ export default function Analytics() {
           </p>
         </div>
 
+        {/* Monthly Report Card */}
+        <MonthlyStockReport items={items} />
+
         {/* Charts Grid */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Status Distribution */}
@@ -54,14 +58,14 @@ export default function Analytics() {
                     cy="50%"
                     outerRadius={90}
                     dataKey="value"
-                    label={({ name, percent }) => 
+                    label={({ name, percent }) =>
                       percent > 0.05 ? `${name} ${(percent * 100).toFixed(0)}%` : ''
                     }
                     labelLine={false}
                   >
                     {statusData.map((entry) => (
-                      <Cell 
-                        key={entry.status} 
+                      <Cell
+                        key={entry.status}
                         fill={STATUS_COLORS[entry.status as keyof typeof STATUS_COLORS]}
                       />
                     ))}
@@ -76,11 +80,11 @@ export default function Analytics() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            
+
             <div className="mt-4 grid grid-cols-2 gap-2">
               {statusData.map((item) => (
                 <div key={item.status} className="flex items-center gap-2 text-sm">
-                  <div 
+                  <div
                     className="h-3 w-3 rounded-full shrink-0"
                     style={{ backgroundColor: STATUS_COLORS[item.status as keyof typeof STATUS_COLORS] }}
                   />
@@ -102,14 +106,14 @@ export default function Analytics() {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={categoryData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis 
-                  type="number" 
+                <XAxis
+                  type="number"
                   tickFormatter={(v) => `RM${v}`}
                   stroke="hsl(var(--muted-foreground))"
                 />
-                <YAxis 
-                  type="category" 
-                  dataKey="name" 
+                <YAxis
+                  type="category"
+                  dataKey="name"
                   width={80}
                   stroke="hsl(var(--muted-foreground))"
                 />
@@ -121,8 +125,8 @@ export default function Analytics() {
                     borderRadius: '8px',
                   }}
                 />
-                <Bar 
-                  dataKey="amount" 
+                <Bar
+                  dataKey="amount"
                   fill="hsl(var(--primary))"
                   radius={[0, 4, 4, 0]}
                 />

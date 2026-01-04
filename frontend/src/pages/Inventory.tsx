@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Search, Package, Undo2 } from 'lucide-react';
 
 export default function Inventory() {
-  const { items, addItem, updateItem, deleteItem, getItemsByCategory, undoLastAction, canUndo } = useInventory();
+  const { items, addItem, updateItem, deleteItem, logUsage, getItemsByCategory, undoLastAction, canUndo } = useInventory();
   const [selectedCategory, setSelectedCategory] = useState<ItemCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [editItem, setEditItem] = useState<InventoryItem | null>(null);
@@ -76,11 +76,13 @@ export default function Inventory() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredItems.map((item, index) => (
               <div key={item.id} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
-                <ItemCard 
-                  item={item} 
-                  onEdit={setEditItem} 
+                <ItemCard
+                  item={item}
+                  onEdit={setEditItem}
                   onDelete={setDeleteItemData}
                   onUpdateQuantity={handleUpdateQuantity}
+                  onLogUsage={logUsage}
+                  showUsageButtons={true}
                 />
               </div>
             ))}
@@ -89,9 +91,9 @@ export default function Inventory() {
       </div>
 
       <EditItemDialog item={editItem} open={!!editItem} onOpenChange={(open) => !open && setEditItem(null)} onSave={updateItem} />
-      <DeleteConfirmDialog 
-        open={!!deleteItemData} 
-        onOpenChange={(open) => !open && setDeleteItemData(null)} 
+      <DeleteConfirmDialog
+        open={!!deleteItemData}
+        onOpenChange={(open) => !open && setDeleteItemData(null)}
         onConfirm={() => { deleteItem(deleteItemData!.id); setDeleteItemData(null); }}
         itemName={deleteItemData?.name || ''}
       />

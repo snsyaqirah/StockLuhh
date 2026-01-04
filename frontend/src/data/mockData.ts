@@ -30,6 +30,8 @@ export const mockInventory: InventoryItem[] = [
     purchaseDate: '2024-10-01',
     isTravelEssential: true,
     travelQuantity: 1,
+    averageLifespanDays: 60, // ~2 months
+    openedDate: '2024-11-15', // Opened ~50 days ago
   },
   {
     id: '3',
@@ -220,7 +222,7 @@ export const getLowStockItems = () => {
 export const getExpiringItems = (daysAhead: number = 30) => {
   const today = new Date();
   const futureDate = new Date(today.getTime() + daysAhead * 24 * 60 * 60 * 1000);
-  
+
   return mockInventory.filter(item => {
     if (!item.expiryDate) return false;
     const expiry = new Date(item.expiryDate);

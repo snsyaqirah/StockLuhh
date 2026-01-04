@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { NAV_ITEMS } from '@/lib/constants';
 import { useTheme } from 'next-themes';
+import { useUserPreferences } from '@/hooks/useUserPreferences';
 
 // Icon mapping for dynamic rendering
 const iconMap = {
@@ -38,6 +39,7 @@ export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { mode, setMode } = useUserPreferences();
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -76,6 +78,42 @@ export function Header() {
 
         {/* Right side actions */}
         <div className="flex items-center gap-2">
+          {/* Mode selector */}
+          <div className="relative group">
+            <Button variant="ghost" size="sm" className="gap-1.5 text-xs font-medium">
+              <span className={cn(
+                "w-2 h-2 rounded-full",
+                mode === 'simple' && "bg-green-500",
+                mode === 'smart' && "bg-blue-500",
+                mode === 'power' && "bg-purple-500"
+              )} />
+              {mode.charAt(0).toUpperCase() + mode.slice(1)}
+            </Button>
+            <div className="absolute right-0 top-full mt-1 w-48 bg-popover border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+              <div className="p-2 space-y-1">
+                <p className="text-xs text-muted-foreground px-2 py-1">App Mode</p>
+                {(['simple', 'smart', 'power'] as const).map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => setMode(m)}
+                    className={cn(
+                      "w-full text-left px-2 py-1.5 rounded text-sm flex items-center gap-2 hover:bg-accent",
+                      mode === m && "bg-accent"
+                    )}
+                  >
+                    <span className={cn(
+                      "w-2 h-2 rounded-full",
+                      m === 'simple' && "bg-green-500",
+                      m === 'smart' && "bg-blue-500",
+                      m === 'power' && "bg-purple-500"
+                    )} />
+                    {m.charAt(0).toUpperCase() + m.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Dark mode toggle */}
           <Button
             variant="ghost"

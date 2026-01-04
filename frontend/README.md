@@ -1,73 +1,168 @@
-# Welcome to your Lovable project
+# 📦 Stockee - Smart Inventory Tracker
 
-## Project info
+> Track your household inventory, get low-stock alerts, expiry reminders, and never overbuy again!
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+![Stockee Banner](./src/assets/images/logo/logo.png)
 
-## How can I edit this code?
+## 🎯 About
 
-There are several ways of editing your application.
+Stockee is a Progressive Web App (PWA) that helps you manage your personal inventory - whether it's toiletries, snacks, groceries, or cleaning supplies. No more overbuying what you already have or forgetting to restock what's running out!
 
-**Use Lovable**
+### Why Stockee?
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- 🛒 **Know what you have** - Clear overview of all your items
+- ⚠️ **Low stock alerts** - Never run out of essentials
+- 📅 **Expiry tracking** - Get reminders before items expire
+- 💰 **Budget tracking** - See how much you spend per category
+- ✈️ **Travel mode** - Auto-generate packing checklists
+- 📱 **Works offline** - PWA with full offline support
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🚀 Quick Start
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js 18+ 
+- npm or yarn or bun
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+```bash
+# Navigate to frontend
+cd frontend
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build for Production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+npm run preview  # Preview production build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📁 Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # React components
+│   ├── common/         # Shared components (ErrorBoundary, Loading, etc.)
+│   ├── layout/         # Layout components (Header, BottomNav)
+│   ├── inventory/      # Inventory feature components
+│   ├── dashboard/      # Dashboard widgets
+│   ├── charts/         # Chart components
+│   └── ui/             # shadcn/ui base components
+├── hooks/              # Custom React hooks
+│   ├── useInventory.ts # Main inventory state management
+│   ├── useLocalStorage.ts
+│   ├── useOnlineStatus.ts
+│   └── usePWA.ts       # PWA install/update handling
+├── lib/                # Utilities
+│   ├── constants.ts    # App constants & config
+│   ├── formatters.ts   # Date/currency formatters
+│   └── utils.ts        # Utility functions
+├── pages/              # Page components (routes)
+│   ├── Index.tsx       # Dashboard
+│   ├── Inventory.tsx   # Inventory list
+│   ├── ShoppingList.tsx
+│   ├── ExpiryTracker.tsx
+│   ├── TravelMode.tsx
+│   ├── Wishlist.tsx
+│   ├── Analytics.tsx
+│   └── NotFound.tsx
+├── services/           # API layer (for backend)
+│   ├── api.ts          # Base API client
+│   └── inventory.service.ts
+├── types/              # TypeScript types
+│   └── inventory.ts
+├── data/               # Mock data
+│   └── mockData.ts
+├── App.tsx             # Main app component
+├── main.tsx            # Entry point
+└── index.css           # Global styles
+```
 
-This project is built with:
+## 🎨 Tech Stack
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **React 18** with TypeScript
+- **Vite** for blazing fast builds
+- **TailwindCSS** for styling
+- **shadcn/ui** for UI components
+- **React Router** for navigation
+- **React Query** for data fetching
+- **Recharts** for analytics charts
+- **Vite PWA** for Progressive Web App
 
-## How can I deploy this project?
+## 📱 PWA Features
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Stockee is a fully-featured PWA with:
 
-## Can I connect a custom domain to my Lovable project?
+- ✅ **Installable** - Add to home screen on any device
+- ✅ **Offline support** - Works without internet
+- ✅ **App-like experience** - Full screen, splash screen
+- ✅ **Auto-updates** - Get latest features automatically
 
-Yes, you can!
+### Installing on Your Device
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Open Stockee in Chrome/Edge/Safari
+2. Look for the "Install" prompt or menu option
+3. Click "Install" or "Add to Home Screen"
+4. Launch from your home screen!
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 🛠️ Development
+
+### Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start dev server at :8080 |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+
+### Environment Variables
+
+Create a `.env` file for custom configuration:
+
+```env
+# API URL (when backend is ready)
+VITE_API_URL=http://localhost:3000/api
+```
+
+### Code Style
+
+- **Components**: PascalCase (e.g., `ItemCard.tsx`)
+- **Hooks**: camelCase with `use` prefix (e.g., `useInventory.ts`)
+- **Utils**: camelCase (e.g., `formatDate`)
+- **Types**: PascalCase (e.g., `InventoryItem`)
+
+## 🔗 Backend Integration
+
+The frontend is ready for backend integration! When your backend API is ready:
+
+1. Set `VITE_API_URL` in `.env`
+2. Use the services in `src/services/`
+3. Replace localStorage calls in `useInventory.ts` with API calls
+
+Example API endpoints expected:
+- `GET /api/inventory` - List all items
+- `POST /api/inventory` - Create item
+- `PATCH /api/inventory/:id` - Update item
+- `DELETE /api/inventory/:id` - Delete item
+
+## 📄 License
+
+This project is private.
+
+## 👤 Author
+
+**Syaqi** - Frontend Developer
+
+---
+
+Made with ❤️ for better inventory management

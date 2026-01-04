@@ -1,14 +1,17 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "stockee",
+  "version": "1.0.0",
+  "description": "Stockee - Smart Inventory Tracker. Track your household inventory, get low-stock alerts, expiry reminders, and never overbuy again.",
+  "author": "Syaqi",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b && vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-pwa-icons": "echo 'Use a tool like pwa-asset-generator to create icons from your logo'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -80,5 +83,14 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
     "vite": "^7.3.0"
-  }
+  },
+  "keywords": [
+    "inventory",
+    "stock-tracker",
+    "expiry-tracker",
+    "shopping-list",
+    "pwa",
+    "react",
+    "vite"
+  ]
 }

@@ -1,26 +1,52 @@
+/**
+ * Header Component
+ * Top navigation with logo, desktop nav, and dark mode toggle
+ */
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Package, LayoutDashboard, ShoppingCart, Menu, X, BarChart3, Heart, Plane, Calendar } from 'lucide-react';
+import {
+  Package,
+  LayoutDashboard,
+  ShoppingCart,
+  Menu,
+  X,
+  BarChart3,
+  Heart,
+  Plane,
+  Calendar,
+  Sun,
+  Moon,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { NAV_ITEMS } from '@/lib/constants';
+import { useTheme } from 'next-themes';
 
-const navItems = [
-  { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/inventory', label: 'Inventory', icon: Package },
-  { path: '/shopping', label: 'Shopping', icon: ShoppingCart },
-  { path: '/expiry', label: 'Expiry', icon: Calendar },
-  { path: '/travel', label: 'Travel', icon: Plane },
-  { path: '/wishlist', label: 'Wishlist', icon: Heart },
-  { path: '/analytics', label: 'Analytics', icon: BarChart3 },
-];
+// Icon mapping for dynamic rendering
+const iconMap = {
+  LayoutDashboard,
+  Package,
+  ShoppingCart,
+  Calendar,
+  Plane,
+  Heart,
+  BarChart3,
+};
 
 export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-soft transition-transform group-hover:scale-105">
             <Package className="h-5 w-5" />
@@ -28,13 +54,19 @@ export function Header() {
           <span className="text-xl font-bold tracking-tight">Stockee</span>
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-1">
-          {navItems.map((item) => {
+          {NAV_ITEMS.map((item) => {
+            const Icon = iconMap[item.icon as keyof typeof iconMap];
             const isActive = location.pathname === item.path;
             return (
               <Link key={item.path} to={item.path}>
-                <Button variant={isActive ? "soft" : "ghost"} size="sm" className={cn("gap-2", isActive && "font-semibold")}>
-                  <item.icon className="h-4 w-4" />
+                <Button
+                  variant={isActive ? "soft" : "ghost"}
+                  size="sm"
+                  className={cn("gap-2", isActive && "font-semibold")}
+                >
+                  <Icon className="h-4 w-4" />
                   {item.label}
                 </Button>
               </Link>
@@ -42,20 +74,54 @@ export function Header() {
           })}
         </nav>
 
-        <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </Button>
+        {/* Right side actions */}
+        <div className="flex items-center gap-2">
+          {/* Dark mode toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            className="h-9 w-9"
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+
+          {/* Mobile menu button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
       </div>
 
+      {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-border/50 bg-background animate-fade-in">
           <nav className="container py-4 grid grid-cols-2 gap-2">
-            {navItems.map((item) => {
+            {NAV_ITEMS.map((item) => {
+              const Icon = iconMap[item.icon as keyof typeof iconMap];
               const isActive = location.pathname === item.path;
               return (
-                <Link key={item.path} to={item.path} onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant={isActive ? "soft" : "ghost"} className={cn("w-full justify-start gap-2", isActive && "font-semibold")}>
-                    <item.icon className="h-5 w-5" />
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Button
+                    variant={isActive ? "soft" : "ghost"}
+                    className={cn(
+                      "w-full justify-start gap-2",
+                      isActive && "font-semibold"
+                    )}
+                  >
+                    <Icon className="h-5 w-5" />
                     {item.label}
                   </Button>
                 </Link>

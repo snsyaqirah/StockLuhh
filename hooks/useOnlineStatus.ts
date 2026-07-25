@@ -6,11 +6,14 @@
 import { useState, useEffect } from 'react';
 
 export function useOnlineStatus() {
-    const [isOnline, setIsOnline] = useState(
-        typeof navigator !== 'undefined' ? navigator.onLine : true
-    );
+    // Always start `true` on both server and client so the first client render
+    // matches SSR output — navigator.onLine is only read after mount, in the
+    // effect below, to avoid a hydration mismatch.
+    const [isOnline, setIsOnline] = useState(true);
 
     useEffect(() => {
+        setIsOnline(navigator.onLine);
+
         const handleOnline = () => setIsOnline(true);
         const handleOffline = () => setIsOnline(false);
 

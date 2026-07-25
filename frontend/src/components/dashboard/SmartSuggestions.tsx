@@ -42,19 +42,14 @@ export function SmartSuggestions({ items }: SmartSuggestionsProps) {
 
             <div className="grid gap-3">
                 {suggestions.slice(0, 3).map((suggestion) => (
-                    <Card key={suggestion.id} className={cn(
-                        "p-4 relative overflow-hidden transition-all hover:shadow-md border-l-4",
-                        suggestion.priority === 'high' ? "border-l-stock-low bg-stock-low/5" :
-                            suggestion.priority === 'medium' ? "border-l-primary bg-primary/5" :
-                                "border-l-muted-foreground bg-secondary/30"
-                    )}>
+                    <Card key={suggestion.id} className="p-4 relative overflow-hidden">
                         <div className="flex items-start justify-between gap-4">
                             <div className="flex gap-3">
                                 <div className={cn(
-                                    "p-2 rounded-full shrink-0",
-                                    suggestion.priority === 'high' ? "bg-stock-low/20 text-stock-low" :
-                                        suggestion.priority === 'medium' ? "bg-primary/20 text-primary" :
-                                            "bg-muted text-muted-foreground"
+                                    "p-2 rounded-full shrink-0 shadow-neu-inset-sm",
+                                    suggestion.priority === 'high' ? "text-stock-low" :
+                                        suggestion.priority === 'medium' ? "text-primary" :
+                                            "text-muted-foreground"
                                 )}>
                                     <Lightbulb className="h-4 w-4" />
                                 </div>

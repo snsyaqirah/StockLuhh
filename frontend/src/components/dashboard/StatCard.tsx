@@ -32,7 +32,7 @@ export function StatCard({
       <div className="flex items-start justify-between">
         <div className="space-y-1">
           <p className="text-sm text-muted-foreground">{title}</p>
-          <p className="text-2xl font-bold tracking-tight">{value}</p>
+          <p className="font-display text-2xl font-extrabold tracking-tight">{value}</p>
           {subtitle && (
             <p className="text-xs text-muted-foreground">{subtitle}</p>
           )}
@@ -46,8 +46,8 @@ export function StatCard({
           )}
         </div>
         <div className={cn(
-          "p-2.5 rounded-xl",
-          iconClassName || "bg-primary/10 text-primary"
+          "p-2.5 rounded-xl shadow-neu-inset-sm",
+          iconClassName || "text-primary"
         )}>
           {icon}
         </div>

@@ -53,7 +53,7 @@ export default function Wishlist() {
         </div>
 
         {wishlist.length === 0 ? (
-          <div className="text-center py-16"><div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-pink-100 mb-4"><Heart className="h-8 w-8 text-pink-500" /></div><h3 className="text-lg font-medium">Your wishlist is empty</h3><p className="text-muted-foreground mt-1">Save products you want to try next</p></div>
+          <div className="text-center py-16"><div className="inline-flex items-center justify-center h-16 w-16 rounded-full shadow-neu-inset mb-4"><Heart className="h-8 w-8 text-accent" /></div><h3 className="text-lg font-medium">Your wishlist is empty</h3><p className="text-muted-foreground mt-1">Save products you want to try next</p></div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {wishlist.map((item, index) => (

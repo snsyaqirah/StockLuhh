@@ -223,7 +223,7 @@ export function EditItemDialog({ item, open, onOpenChange, onSave }: EditItemDia
             />
           </div>
 
-          <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
+          <div className="flex items-center justify-between p-3 rounded-2xl shadow-neu-inset-sm">
             <div>
               <Label htmlFor="travel-essential" className="font-medium">Travel Essential</Label>
               <p className="text-xs text-muted-foreground">Include in travel kits</p>

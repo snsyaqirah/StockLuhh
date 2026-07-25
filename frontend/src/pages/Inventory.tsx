@@ -64,7 +64,7 @@ export default function Inventory() {
 
         {filteredItems.length === 0 ? (
           <div className="text-center py-16">
-            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-secondary mb-4">
+            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full shadow-neu-inset mb-4">
               <Package className="h-8 w-8 text-muted-foreground" />
             </div>
             <h3 className="text-lg font-medium">No items found</h3>

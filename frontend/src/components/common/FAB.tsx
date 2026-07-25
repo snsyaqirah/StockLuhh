@@ -42,19 +42,19 @@ export function FAB() {
         {
             icon: ShoppingCart,
             label: 'Shopping',
-            color: 'bg-blue-500 hover:bg-blue-600',
+            iconColor: 'text-primary',
             action: () => navigate('/shopping')
         },
         {
             icon: Plane,
             label: 'Travel',
-            color: 'bg-purple-500 hover:bg-purple-600',
+            iconColor: 'text-accent-foreground',
             action: () => navigate('/travel')
         },
         {
             icon: Calendar,
             label: 'Expiry',
-            color: 'bg-orange-500 hover:bg-orange-600',
+            iconColor: 'text-stock-low',
             action: () => navigate('/expiry')
         },
     ];
@@ -66,7 +66,7 @@ export function FAB() {
             {/* Backdrop */}
             {isExpanded && (
                 <div
-                    className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+                    className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 lg:hidden"
                     onClick={() => setIsExpanded(false)}
                 />
             )}
@@ -79,18 +79,19 @@ export function FAB() {
                         className="flex items-center gap-2 animate-fade-in"
                         style={{ animationDelay: `${index * 50}ms` }}
                     >
-                        <span className="bg-background/95 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg">
+                        <span className="bg-background px-3 py-1.5 rounded-xl text-sm font-medium shadow-neu-sm">
                             {action.label}
                         </span>
                         <Button
                             size="icon"
-                            className={cn("h-12 w-12 rounded-full shadow-lg", action.color)}
+                            variant="secondary"
+                            className="h-12 w-12"
                             onClick={() => {
                                 action.action();
                                 setIsExpanded(false);
                             }}
                         >
-                            <action.icon className="h-5 w-5 text-white" />
+                            <action.icon className={cn("h-5 w-5", action.iconColor)} />
                         </Button>
                     </div>
                 ))}
@@ -100,10 +101,8 @@ export function FAB() {
             <Button
                 size="icon"
                 className={cn(
-                    "fixed bottom-24 right-4 z-50 h-14 w-14 rounded-full shadow-elevated transition-all duration-200 lg:hidden",
-                    isExpanded
-                        ? "bg-muted-foreground rotate-45"
-                        : "bg-primary hover:bg-primary/90 active:scale-95"
+                    "fixed bottom-24 right-4 z-50 h-14 w-14 rounded-full shadow-neu-flat-hover transition-all duration-300 lg:hidden",
+                    isExpanded && "bg-destructive rotate-45"
                 )}
                 onMouseDown={handlePressStart}
                 onMouseUp={handlePressEnd}

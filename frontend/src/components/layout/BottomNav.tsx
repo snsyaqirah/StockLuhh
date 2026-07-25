@@ -43,7 +43,7 @@ export function BottomNav() {
         <nav
             className={cn(
                 'fixed bottom-0 left-0 right-0 z-50',
-                'bg-background/95 backdrop-blur-lg border-t border-border',
+                'bg-background shadow-[0_-8px_20px_-6px_rgb(var(--neu-shadow-dark)/0.35)]',
                 'pb-safe', // For iOS safe area
                 'lg:hidden' // Hide on desktop
             )}
@@ -68,7 +68,7 @@ export function BottomNav() {
                         >
                             <div className={cn(
                                 'relative p-1.5 rounded-xl transition-all duration-200',
-                                isActive && 'bg-primary/10'
+                                isActive && 'shadow-neu-inset-sm'
                             )}>
                                 <Icon className={cn(
                                     'h-5 w-5 transition-transform duration-200',
@@ -102,7 +102,7 @@ export function BottomNav() {
                         >
                             <div className={cn(
                                 'p-1.5 rounded-xl transition-all duration-200',
-                                moreItems.some(i => location.pathname === i.path) && 'bg-primary/10'
+                                moreItems.some(i => location.pathname === i.path) && 'shadow-neu-inset-sm'
                             )}>
                                 <MoreHorizontal className="h-5 w-5" />
                             </div>

@@ -6,11 +6,12 @@ import { MonthlyStockReport } from '@/components/dashboard/MonthlyReport';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { STATUS_CONFIG } from '@/types/inventory';
 
+// Reuses the same stock-status tokens as StatusBadge/ItemCard elsewhere in the app
 const STATUS_COLORS = {
-  new: 'hsl(150, 45%, 45%)',
-  'in-use': 'hsl(150, 35%, 50%)',
-  low: 'hsl(38, 90%, 55%)',
-  finished: 'hsl(12, 75%, 55%)',
+  new: 'hsl(var(--stock-full))',
+  'in-use': 'hsl(var(--stock-good))',
+  low: 'hsl(var(--stock-low))',
+  finished: 'hsl(var(--stock-empty))',
 };
 
 export default function Analytics() {
@@ -121,8 +122,9 @@ export default function Analytics() {
                   formatter={(value: number) => [`RM${value.toFixed(2)}`, 'Spending']}
                   contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '8px',
+                    border: 'none',
+                    borderRadius: '16px',
+                    boxShadow: 'var(--shadow-neu-flat-hover)',
                   }}
                 />
                 <Bar

@@ -125,7 +125,7 @@ export default function ShoppingList() {
               <p className="text-sm text-muted-foreground">
                 {checkedItems.size} of {lowStockItems.length} checked
               </p>
-              <div className="mt-1 h-2 w-32 bg-secondary rounded-full overflow-hidden">
+              <div className="mt-1 h-2 w-32 rounded-full shadow-neu-inset-sm overflow-hidden">
                 <div
                   className="h-full bg-primary transition-all duration-300"
                   style={{
@@ -142,7 +142,7 @@ export default function ShoppingList() {
         {/* Shopping Items */}
         {lowStockItems.length === 0 ? (
           <div className="text-center py-16">
-            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-stock-good/15 mb-4">
+            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full shadow-neu-inset mb-4">
               <ShoppingCart className="h-8 w-8 text-stock-good" />
             </div>
             <h3 className="text-lg font-medium">All stocked up!</h3>

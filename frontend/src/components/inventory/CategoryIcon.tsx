@@ -1,14 +1,14 @@
-import { 
-  Droplets, 
-  Sparkles, 
-  Wind, 
-  Smile, 
-  SprayCan, 
-  ShoppingBasket, 
-  Cookie, 
-  Coffee, 
-  Pill, 
-  Package 
+import {
+  Droplets,
+  Sparkles,
+  Wind,
+  Smile,
+  SprayCan,
+  ShoppingBasket,
+  Cookie,
+  Coffee,
+  Pill,
+  Package
 } from 'lucide-react';
 import { ItemCategory } from '@/types/inventory';
 import { cn } from '@/lib/utils';
@@ -27,16 +27,16 @@ const iconMap = {
 };
 
 const colorMap: Record<ItemCategory, string> = {
-  toiletries: 'bg-blue-100 text-blue-600',
-  skincare: 'bg-pink-100 text-pink-600',
-  haircare: 'bg-purple-100 text-purple-600',
-  dental: 'bg-cyan-100 text-cyan-600',
-  cleaning: 'bg-emerald-100 text-emerald-600',
-  grocery: 'bg-amber-100 text-amber-600',
-  snacks: 'bg-orange-100 text-orange-600',
-  beverages: 'bg-rose-100 text-rose-600',
-  medicine: 'bg-red-100 text-red-600',
-  other: 'bg-slate-100 text-slate-600',
+  toiletries: 'text-blue-600 dark:text-blue-400',
+  skincare: 'text-pink-600 dark:text-pink-400',
+  haircare: 'text-purple-600 dark:text-purple-400',
+  dental: 'text-cyan-600 dark:text-cyan-400',
+  cleaning: 'text-emerald-600 dark:text-emerald-400',
+  grocery: 'text-amber-600 dark:text-amber-400',
+  snacks: 'text-orange-600 dark:text-orange-400',
+  beverages: 'text-rose-600 dark:text-rose-400',
+  medicine: 'text-red-600 dark:text-red-400',
+  other: 'text-slate-600 dark:text-slate-400',
 };
 
 interface CategoryIconProps {
@@ -47,7 +47,7 @@ interface CategoryIconProps {
 
 export function CategoryIcon({ category, size = 'md', className }: CategoryIconProps) {
   const Icon = iconMap[category];
-  
+
   const sizeClasses = {
     sm: 'h-6 w-6 p-1',
     md: 'h-8 w-8 p-1.5',
@@ -62,7 +62,7 @@ export function CategoryIcon({ category, size = 'md', className }: CategoryIconP
 
   return (
     <div className={cn(
-      'rounded-lg flex items-center justify-center',
+      'rounded-xl flex items-center justify-center shadow-neu-inset-sm shrink-0',
       sizeClasses[size],
       colorMap[category],
       className

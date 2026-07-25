@@ -1,5 +1,5 @@
 /**
- * Date and Currency Formatters for Stockee
+ * Date and Currency Formatters for StockLuhh
  * Using Malaysian locale (ms-MY) and Ringgit (RM)
  */
 

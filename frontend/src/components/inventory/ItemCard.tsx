@@ -39,12 +39,7 @@ export function ItemCard({
   const isExpired = item.expiryDate && new Date(item.expiryDate) < new Date();
 
   return (
-    <Card className={cn(
-      "p-4 gradient-card shadow-card hover:shadow-elevated transition-all duration-200 group",
-      "border border-border/50 hover:border-border",
-      isExpired && "border-stock-expired/30 bg-stock-expired/5",
-      className
-    )}>
+    <Card className={cn("p-4 group", className)}>
       <div className="flex items-start gap-3">
         <CategoryIcon category={item.category} size="lg" />
 
@@ -112,11 +107,11 @@ export function ItemCard({
           {/* Quantity Controls */}
           <div className="mt-3 flex items-center gap-2">
             {onUpdateQuantity && (
-              <div className="flex items-center gap-1 bg-secondary rounded-lg p-0.5">
+              <div className="flex items-center gap-1 rounded-full shadow-neu-inset-sm p-0.5">
                 <Button
                   variant="ghost"
                   size="icon-sm"
-                  className="h-6 w-6 rounded-md"
+                  className="h-6 w-6 rounded-full"
                   onClick={() => onUpdateQuantity(item.id, -1)}
                   disabled={item.quantity <= 0}
                 >
@@ -126,7 +121,7 @@ export function ItemCard({
                 <Button
                   variant="ghost"
                   size="icon-sm"
-                  className="h-6 w-6 rounded-md"
+                  className="h-6 w-6 rounded-full"
                   onClick={() => onUpdateQuantity(item.id, 1)}
                 >
                   <Plus className="h-3 w-3" />
@@ -153,7 +148,7 @@ export function ItemCard({
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 px-2.5 text-xs gap-1.5 hover:bg-primary/10 hover:border-primary"
+                className="h-8 px-2.5 text-xs gap-1.5 hover:text-primary"
                 onClick={() => onLogUsage(item.id, 'once')}
               >
                 <Circle className="h-3 w-3" />
@@ -162,7 +157,7 @@ export function ItemCard({
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 px-2.5 text-xs gap-1.5 hover:bg-amber-500/10 hover:border-amber-500"
+                className="h-8 px-2.5 text-xs gap-1.5 hover:text-stock-low"
                 onClick={() => onLogUsage(item.id, 'half')}
               >
                 <CircleDot className="h-3 w-3" />
@@ -171,7 +166,7 @@ export function ItemCard({
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 px-2.5 text-xs gap-1.5 hover:bg-stock-expired/10 hover:border-stock-expired text-stock-low"
+                className="h-8 px-2.5 text-xs gap-1.5 hover:text-stock-expired"
                 onClick={() => onLogUsage(item.id, 'finished')}
               >
                 <CheckCircle className="h-3 w-3" />

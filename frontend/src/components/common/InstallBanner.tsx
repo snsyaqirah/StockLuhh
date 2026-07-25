@@ -24,17 +24,17 @@ export function InstallBanner({ className }: InstallBannerProps) {
         <div
             className={cn(
                 'fixed bottom-20 left-4 right-4 md:left-auto md:right-4 md:w-80 z-50',
-                'bg-card border rounded-xl shadow-elevated p-4',
+                'bg-card rounded-[2rem] shadow-neu-flat-hover p-4',
                 'animate-slide-up',
                 className
             )}
         >
             <div className="flex items-start gap-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-2xl shadow-neu-inset-sm flex items-center justify-center flex-shrink-0">
                     <Download className="h-5 w-5 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-sm">Install Stockee</h3>
+                    <h3 className="font-medium text-sm">Install StockLuhh</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">
                         Add to your home screen for quick access
                     </p>

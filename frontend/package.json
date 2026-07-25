@@ -1,7 +1,7 @@
 {
-  "name": "stockee",
+  "name": "stockluhh",
   "version": "1.0.0",
-  "description": "Stockee - Smart Inventory Tracker. Track your household inventory, get low-stock alerts, expiry reminders, and never overbuy again.",
+  "description": "StockLuhh - Smart Inventory Tracker. Track your household inventory, get low-stock alerts, expiry reminders, and never overbuy again.",
   "author": "Syaqi",
   "private": true,
   "type": "module",

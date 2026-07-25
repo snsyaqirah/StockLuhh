@@ -50,10 +50,10 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-soft transition-transform group-hover:scale-105">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-neu-sm transition-transform group-hover:scale-105">
             <Package className="h-5 w-5" />
           </div>
-          <span className="text-xl font-bold tracking-tight">Stockee</span>
+          <span className="font-display text-xl font-extrabold tracking-tight">StockLuhh</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -89,7 +89,7 @@ export function Header() {
               )} />
               {mode.charAt(0).toUpperCase() + mode.slice(1)}
             </Button>
-            <div className="absolute right-0 top-full mt-1 w-48 bg-popover border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+            <div className="absolute right-0 top-full mt-2 w-48 bg-popover rounded-2xl shadow-neu-flat-hover opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
               <div className="p-2 space-y-1">
                 <p className="text-xs text-muted-foreground px-2 py-1">App Mode</p>
                 {(['simple', 'smart', 'power'] as const).map((m) => (
@@ -97,8 +97,8 @@ export function Header() {
                     key={m}
                     onClick={() => setMode(m)}
                     className={cn(
-                      "w-full text-left px-2 py-1.5 rounded text-sm flex items-center gap-2 hover:bg-accent",
-                      mode === m && "bg-accent"
+                      "w-full text-left px-2 py-1.5 rounded-xl text-sm flex items-center gap-2 hover:bg-accent/15",
+                      mode === m && "shadow-neu-inset-sm"
                     )}
                   >
                     <span className={cn(
@@ -141,7 +141,7 @@ export function Header() {
 
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-border/50 bg-background animate-fade-in">
+        <div className="lg:hidden bg-background shadow-neu-sm animate-fade-in">
           <nav className="container py-4 grid grid-cols-2 gap-2">
             {NAV_ITEMS.map((item) => {
               const Icon = iconMap[item.icon as keyof typeof iconMap];

@@ -1,4 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { useTheme } from 'next-themes';
 import { Card } from '@/components/ui/card';
 
 interface SpendingData {
@@ -10,17 +11,16 @@ interface SpendingChartProps {
   data: SpendingData[];
 }
 
-const COLORS = [
-  'hsl(210, 70%, 55%)', // blue - toiletries
-  'hsl(340, 70%, 65%)', // pink - skincare
-  'hsl(270, 60%, 60%)', // purple - haircare
-  'hsl(190, 70%, 50%)', // cyan - dental
-  'hsl(150, 60%, 45%)', // emerald - cleaning
-  'hsl(40, 85%, 55%)',  // amber - grocery
-  'hsl(25, 85%, 55%)',  // orange - snacks
-  'hsl(350, 70%, 60%)', // rose - beverages
-  'hsl(0, 70%, 55%)',   // red - medicine
-  'hsl(220, 15%, 50%)', // slate - other
+// Validated 8-hue categorical palette (fixed order, CVD-checked adjacent pairs).
+// Category names are shown directly via the legend below, satisfying the
+// contrast relief rule for slices that sit under 3:1 on the surface.
+const COLORS_LIGHT = [
+  '#2a78d6', '#eb6834', '#1baf7a', '#eda100',
+  '#e87ba4', '#008300', '#4a3aa7', '#e34948',
+];
+const COLORS_DARK = [
+  '#3987e5', '#d95926', '#199e70', '#c98500',
+  '#d55181', '#008300', '#9085e9', '#e66767',
 ];
 
 const categoryLabels: Record<string, string> = {
@@ -37,6 +37,9 @@ const categoryLabels: Record<string, string> = {
 };
 
 export function SpendingChart({ data }: SpendingChartProps) {
+  const { resolvedTheme } = useTheme();
+  const COLORS = resolvedTheme === 'dark' ? COLORS_DARK : COLORS_LIGHT;
+
   const formattedData = data.map((item) => ({
     ...item,
     name: categoryLabels[item.category] || item.category,
@@ -46,7 +49,7 @@ export function SpendingChart({ data }: SpendingChartProps) {
 
   return (
     <Card className="p-4 gradient-card shadow-card border border-border/50">
-      <h3 className="font-semibold mb-4">Spending by Category</h3>
+      <h3 className="font-display font-bold mb-4">Spending by Category</h3>
       
       {data.length === 0 ? (
         <p className="text-sm text-muted-foreground text-center py-12">No spending data yet</p>
@@ -65,8 +68,8 @@ export function SpendingChart({ data }: SpendingChartProps) {
                   dataKey="amount"
                 >
                   {formattedData.map((_, index) => (
-                    <Cell 
-                      key={`cell-${index}`} 
+                    <Cell
+                      key={`cell-${index}`}
                       fill={COLORS[index % COLORS.length]}
                       className="transition-all duration-200 hover:opacity-80"
                     />
@@ -76,9 +79,9 @@ export function SpendingChart({ data }: SpendingChartProps) {
                   formatter={(value: number) => [`RM${value.toFixed(2)}`, 'Amount']}
                   contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '8px',
-                    boxShadow: 'var(--shadow-card)',
+                    border: 'none',
+                    borderRadius: '16px',
+                    boxShadow: 'var(--shadow-neu-flat-hover)',
                   }}
                 />
               </PieChart>

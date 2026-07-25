@@ -4,22 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full border-transparent px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
-        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
+        default: "bg-primary text-primary-foreground",
+        secondary: "bg-background text-secondary-foreground shadow-neu-inset-sm",
+        destructive: "bg-destructive text-destructive-foreground",
+        outline: "bg-background text-foreground shadow-neu-inset-sm",
         // Stock status variants
-        "stock-full": "border-transparent bg-stock-full/15 text-stock-full",
-        "stock-good": "border-transparent bg-stock-good/15 text-stock-good",
-        "stock-low": "border-transparent bg-stock-low/15 text-stock-low",
-        "stock-empty": "border-transparent bg-stock-empty/15 text-stock-empty",
-        "stock-expired": "border-transparent bg-stock-expired/15 text-stock-expired",
+        "stock-full": "bg-stock-full/15 text-stock-full",
+        "stock-good": "bg-stock-good/15 text-stock-good",
+        "stock-low": "bg-stock-low/15 text-stock-low",
+        "stock-empty": "bg-stock-empty/15 text-stock-empty",
+        "stock-expired": "bg-stock-expired/15 text-stock-expired",
         // Category badges
-        category: "border-transparent bg-secondary text-secondary-foreground",
+        category: "bg-background text-secondary-foreground shadow-neu-inset-sm",
       },
     },
     defaultVariants: {

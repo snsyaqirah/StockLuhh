@@ -5,9 +5,9 @@ import { useLocalStorage } from './useLocalStorage';
 import { toast } from '@/hooks/use-toast';
 
 export function useInventory() {
-  const [items, setItems] = useLocalStorage<InventoryItem[]>('stockee-inventory', mockInventory);
-  const [wishlist, setWishlist] = useLocalStorage<WishlistItem[]>('stockee-wishlist', mockWishlist);
-  const [travelKits, setTravelKits] = useLocalStorage<TravelKit[]>('stockee-travel-kits', mockTravelKits);
+  const [items, setItems] = useLocalStorage<InventoryItem[]>('stockluhh-inventory', mockInventory);
+  const [wishlist, setWishlist] = useLocalStorage<WishlistItem[]>('stockluhh-wishlist', mockWishlist);
+  const [travelKits, setTravelKits] = useLocalStorage<TravelKit[]>('stockluhh-travel-kits', mockTravelKits);
   const [undoStack, setUndoStack] = useState<{ action: string; data: InventoryItem | WishlistItem }[]>([]);
 
   // Inventory CRUD

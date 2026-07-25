@@ -1,14 +1,14 @@
-# 📦 Stockee - Smart Inventory Tracker
+# 📦 StockLuhh - Smart Inventory Tracker
 
 > Track your household inventory, get low-stock alerts, expiry reminders, and never overbuy again!
 
-![Stockee Banner](./src/assets/images/logo/logo.png)
+![StockLuhh Banner](./src/assets/images/logo/logo.png)
 
 ## 🎯 About
 
-Stockee is a Progressive Web App (PWA) that helps you manage your personal inventory - whether it's toiletries, snacks, groceries, or cleaning supplies. No more overbuying what you already have or forgetting to restock what's running out!
+StockLuhh is a Progressive Web App (PWA) that helps you manage your personal inventory - whether it's toiletries, snacks, groceries, or cleaning supplies. No more overbuying what you already have or forgetting to restock what's running out!
 
-### Why Stockee?
+### Why StockLuhh?
 
 - 🛒 **Know what you have** - Clear overview of all your items
 - ⚠️ **Low stock alerts** - Never run out of essentials
@@ -100,7 +100,7 @@ src/
 
 ## 📱 PWA Features
 
-Stockee is a fully-featured PWA with:
+StockLuhh is a fully-featured PWA with:
 
 - ✅ **Installable** - Add to home screen on any device
 - ✅ **Offline support** - Works without internet
@@ -109,7 +109,7 @@ Stockee is a fully-featured PWA with:
 
 ### Installing on Your Device
 
-1. Open Stockee in Chrome/Edge/Safari
+1. Open StockLuhh in Chrome/Edge/Safari
 2. Look for the "Install" prompt or menu option
 3. Click "Install" or "Add to Home Screen"
 4. Launch from your home screen!

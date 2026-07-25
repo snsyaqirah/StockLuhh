@@ -1,5 +1,5 @@
 /**
- * Vite Configuration for Stockee
+ * Vite Configuration for StockLuhh
  * Enhanced PWA support and optimized build settings
  */
 
@@ -27,12 +27,12 @@ export default defineConfig(({ mode }) => ({
         "offline.html",
       ],
       manifest: {
-        name: "Stockee - Smart Inventory Tracker",
-        short_name: "Stockee",
+        name: "StockLuhh - Smart Inventory Tracker",
+        short_name: "StockLuhh",
         description:
           "Track your household inventory, get low-stock alerts, expiry reminders, and never overbuy again.",
-        theme_color: "#4a7c6f",
-        background_color: "#f9f7f4",
+        theme_color: "#4F9D8F",
+        background_color: "#E3E7ED",
         display: "standalone",
         orientation: "portrait-primary",
         scope: "/",

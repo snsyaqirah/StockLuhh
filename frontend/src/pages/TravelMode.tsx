@@ -67,14 +67,14 @@ export default function TravelMode() {
                   <div className="flex-1 overflow-y-auto space-y-2 pr-2">
                     {filteredItems.map(item => (
                       <div key={item.id} className={cn(
-                        "flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer",
-                        item.isTravelEssential ? "bg-primary/5 border-primary" : "bg-card border-border hover:border-primary/50"
+                        "flex items-center gap-3 p-3 rounded-2xl transition-all cursor-pointer",
+                        item.isTravelEssential ? "shadow-neu-inset-sm bg-primary/5" : "shadow-neu-sm hover:shadow-neu-flat"
                       )}
                         onClick={() => updateItem(item.id, { isTravelEssential: !item.isTravelEssential })}
                       >
                         <div className={cn(
-                          "h-5 w-5 rounded border flex items-center justify-center transition-colors",
-                          item.isTravelEssential ? "bg-primary border-primary text-primary-foreground" : "border-muted-foreground"
+                          "h-5 w-5 rounded-md flex items-center justify-center transition-colors shrink-0",
+                          item.isTravelEssential ? "bg-primary text-primary-foreground" : "shadow-neu-inset-sm"
                         )}>
                           {item.isTravelEssential && <Check className="h-3 w-3" />}
                         </div>
@@ -129,11 +129,11 @@ export default function TravelMode() {
                     </div>
                     <Button variant="ghost" size="icon-sm" onClick={() => deleteTravelKit(kit.id)}><Trash2 className="h-4 w-4 text-muted-foreground" /></Button>
                   </div>
-                  <div className="mb-4"><div className="flex justify-between text-sm mb-1"><span>{packedCount} of {kit.items.length} packed</span><span>{Math.round(progress)}%</span></div><div className="h-2 bg-secondary rounded-full overflow-hidden"><div className="h-full bg-primary transition-all duration-300" style={{ width: `${progress}%` }} /></div></div>
+                  <div className="mb-4"><div className="flex justify-between text-sm mb-1"><span>{packedCount} of {kit.items.length} packed</span><span>{Math.round(progress)}%</span></div><div className="h-2 rounded-full shadow-neu-inset-sm overflow-hidden"><div className="h-full bg-primary transition-all duration-300" style={{ width: `${progress}%` }} /></div></div>
                   <div className="space-y-2">
                     {kit.items.map((item) => (
-                      <div key={item.itemId} className={cn("flex items-center gap-3 p-2 rounded-lg transition-all cursor-pointer", item.packed ? "bg-primary/5" : "bg-secondary/50")} onClick={() => toggleTravelItemPacked(kit.id, item.itemId)}>
-                        <div className={cn("h-8 w-8 rounded flex items-center justify-center transition-colors", item.packed ? "bg-primary text-primary-foreground" : "bg-background border")}>
+                      <div key={item.itemId} className={cn("flex items-center gap-3 p-2 rounded-xl transition-all cursor-pointer", item.packed ? "shadow-neu-inset-sm bg-primary/5" : "hover:shadow-neu-sm")} onClick={() => toggleTravelItemPacked(kit.id, item.itemId)}>
+                        <div className={cn("h-8 w-8 rounded-lg flex items-center justify-center transition-colors shrink-0", item.packed ? "bg-primary text-primary-foreground" : "shadow-neu-inset-sm")}>
                           {item.packed ? <Check className="h-4 w-4" /> : null}
                         </div>
                         <CategoryIcon category={item.category} size="sm" />

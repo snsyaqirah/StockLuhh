@@ -1,20 +1,20 @@
 /**
- * Application constants for Stockee
+ * Application constants for StockLuhh
  * Centralized configuration values
  */
 
 // Application Info
-export const APP_NAME = 'Stockee';
+export const APP_NAME = 'StockLuhh';
 export const APP_VERSION = '1.0.0';
 export const APP_DESCRIPTION = 'Smart Inventory Tracker';
 
 // Storage Keys (for localStorage)
 export const STORAGE_KEYS = {
-  INVENTORY: 'stockee-inventory',
-  WISHLIST: 'stockee-wishlist',
-  TRAVEL_KITS: 'stockee-travel-kits',
-  THEME: 'stockee-theme',
-  SETTINGS: 'stockee-settings',
+  INVENTORY: 'stockluhh-inventory',
+  WISHLIST: 'stockluhh-wishlist',
+  TRAVEL_KITS: 'stockluhh-travel-kits',
+  THEME: 'stockluhh-theme',
+  SETTINGS: 'stockluhh-settings',
 } as const;
 
 // Default Settings

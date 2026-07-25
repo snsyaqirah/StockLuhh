@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,121 +6,139 @@
 
 @layer base {
   :root {
-    /* Warm cream background */
-    --background: 40 30% 97%;
-    --foreground: 30 10% 15%;
+    /* Cool slate "clay" surface - everything is molded from this one tone */
+    --background: 216 22% 91%;
+    --foreground: 209 15% 28%;
 
-    /* Cards - slightly warmer white */
-    --card: 40 25% 99%;
-    --card-foreground: 30 10% 15%;
+    /* Cards match the page surface - neumorphism never uses a separate white card color */
+    --card: 216 22% 91%;
+    --card-foreground: 209 15% 28%;
 
-    --popover: 40 25% 99%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 216 22% 91%;
+    --popover-foreground: 209 15% 28%;
 
-    /* Sage green primary */
-    --primary: 150 25% 40%;
-    --primary-foreground: 40 30% 98%;
+    /* Teal-green primary - reads as "in stock / healthy" */
+    --primary: 169 33% 46%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Warm beige secondary */
-    --secondary: 35 30% 92%;
-    --secondary-foreground: 30 15% 25%;
+    --secondary: 215 19% 88%;
+    --secondary-foreground: 209 15% 28%;
 
-    --muted: 35 20% 94%;
-    --muted-foreground: 30 10% 45%;
+    --muted: 215 21% 89%;
+    --muted-foreground: 220 9% 46%;
 
-    /* Soft teal accent */
-    --accent: 170 35% 45%;
-    --accent-foreground: 40 30% 98%;
+    --accent: 169 37% 58%;
+    --accent-foreground: 198 22% 15%;
 
-    /* Warning states */
-    --destructive: 12 75% 55%;
-    --destructive-foreground: 40 30% 98%;
+    --destructive: 14 64% 58%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 35 25% 88%;
-    --input: 35 25% 88%;
-    --ring: 150 25% 40%;
+    /* Neumorphism has no borders - shadows define every edge. This matches
+       the surface so any stray `border` utility blends away instead of showing a seam. */
+    --border: 216 22% 91%;
+    --input: 216 22% 91%;
+    --ring: 169 33% 46%;
 
-    --radius: 1rem;
+    --radius: 1.25rem;
 
-    /* Custom colors for stock status */
-    --stock-full: 150 45% 45%;
-    --stock-good: 150 35% 50%;
-    --stock-low: 38 90% 55%;
-    --stock-empty: 12 75% 55%;
-    --stock-expired: 350 65% 50%;
+    /* Stock status colors */
+    --stock-full: 156 45% 45%;
+    --stock-good: 169 33% 46%;
+    --stock-low: 37 73% 55%;
+    --stock-empty: 14 64% 58%;
+    --stock-expired: 9 53% 50%;
 
-    /* Gradients */
-    --gradient-warm: linear-gradient(135deg, hsl(35 40% 95%) 0%, hsl(40 30% 97%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(40 25% 99%) 0%, hsl(38 20% 97%) 100%);
-    --gradient-primary: linear-gradient(135deg, hsl(150 30% 45%) 0%, hsl(160 35% 40%) 100%);
+    /* Neumorphic shadow pairs: light source top-left, shadow bottom-right */
+    --neu-shadow-light: 255 255 255;
+    --neu-shadow-dark: 163 177 198;
 
-    /* Shadows */
-    --shadow-soft: 0 2px 8px -2px hsl(30 20% 20% / 0.08);
-    --shadow-card: 0 4px 16px -4px hsl(30 20% 20% / 0.1);
-    --shadow-elevated: 0 8px 24px -6px hsl(30 20% 20% / 0.12);
+    --shadow-neu-sm: 5px 5px 10px rgb(var(--neu-shadow-dark) / 0.6), -5px -5px 10px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-flat: 9px 9px 16px rgb(var(--neu-shadow-dark) / 0.6), -9px -9px 16px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-flat-hover: 12px 12px 20px rgb(var(--neu-shadow-dark) / 0.7), -12px -12px 20px rgb(var(--neu-shadow-light) / 0.6);
+    --shadow-neu-inset-sm: inset 3px 3px 6px rgb(var(--neu-shadow-dark) / 0.6), inset -3px -3px 6px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-inset: inset 6px 6px 10px rgb(var(--neu-shadow-dark) / 0.6), inset -6px -6px 10px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-inset-deep: inset 10px 10px 20px rgb(var(--neu-shadow-dark) / 0.7), inset -10px -10px 20px rgb(var(--neu-shadow-light) / 0.6);
 
-    /* Sidebar */
-    --sidebar-background: 38 28% 95%;
-    --sidebar-foreground: 30 10% 25%;
-    --sidebar-primary: 150 25% 40%;
-    --sidebar-primary-foreground: 40 30% 98%;
-    --sidebar-accent: 35 30% 90%;
-    --sidebar-accent-foreground: 30 15% 25%;
-    --sidebar-border: 35 25% 88%;
-    --sidebar-ring: 150 25% 40%;
+    /* Legacy shadow/gradient names kept so existing utility classes stay flat + neumorphic
+       without having to touch every page that references them */
+    --shadow-soft: var(--shadow-neu-sm);
+    --shadow-card: var(--shadow-neu-flat);
+    --shadow-elevated: var(--shadow-neu-flat-hover);
+    --gradient-warm: hsl(var(--background));
+    --gradient-card: hsl(var(--card));
+    --gradient-primary: hsl(var(--primary));
+
+    --sidebar-background: 216 22% 91%;
+    --sidebar-foreground: 209 15% 28%;
+    --sidebar-primary: 169 33% 46%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 19% 88%;
+    --sidebar-accent-foreground: 209 15% 28%;
+    --sidebar-border: 216 22% 91%;
+    --sidebar-ring: 169 33% 46%;
   }
 
   .dark {
-    --background: 30 15% 10%;
-    --foreground: 40 20% 95%;
+    --background: 219 16% 18%;
+    --foreground: 216 22% 91%;
 
-    --card: 30 12% 14%;
-    --card-foreground: 40 20% 95%;
+    --card: 219 16% 18%;
+    --card-foreground: 216 22% 91%;
 
-    --popover: 30 12% 14%;
-    --popover-foreground: 40 20% 95%;
+    --popover: 219 16% 18%;
+    --popover-foreground: 216 22% 91%;
 
-    --primary: 155 35% 50%;
-    --primary-foreground: 30 15% 10%;
+    --primary: 169 36% 54%;
+    --primary-foreground: 156 16% 12%;
 
-    --secondary: 30 10% 20%;
-    --secondary-foreground: 40 20% 90%;
+    --secondary: 220 16% 22%;
+    --secondary-foreground: 216 22% 91%;
 
-    --muted: 30 10% 18%;
-    --muted-foreground: 35 15% 60%;
+    --muted: 218 16% 24%;
+    --muted-foreground: 218 12% 59%;
 
-    --accent: 170 40% 45%;
-    --accent-foreground: 30 15% 10%;
+    --accent: 169 37% 58%;
+    --accent-foreground: 156 16% 12%;
 
-    --destructive: 12 65% 50%;
-    --destructive-foreground: 40 20% 95%;
+    --destructive: 13 68% 65%;
+    --destructive-foreground: 156 16% 12%;
 
-    --border: 30 10% 22%;
-    --input: 30 10% 22%;
-    --ring: 155 35% 50%;
+    --border: 219 16% 18%;
+    --input: 219 16% 18%;
+    --ring: 169 36% 54%;
 
-    --stock-full: 155 45% 45%;
-    --stock-good: 155 35% 50%;
-    --stock-low: 40 85% 55%;
-    --stock-empty: 12 70% 55%;
-    --stock-expired: 350 60% 55%;
+    --stock-full: 155 48% 54%;
+    --stock-good: 169 36% 54%;
+    --stock-low: 37 74% 65%;
+    --stock-empty: 13 68% 65%;
+    --stock-expired: 10 61% 58%;
 
-    --gradient-warm: linear-gradient(135deg, hsl(30 12% 12%) 0%, hsl(30 15% 10%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(30 12% 14%) 0%, hsl(30 10% 12%) 100%);
-    --gradient-primary: linear-gradient(135deg, hsl(155 40% 45%) 0%, hsl(165 45% 40%) 100%);
+    /* Dark neumorphism: near-black shadow, faint white glow as the "light" side */
+    --neu-shadow-light: 255 255 255;
+    --neu-shadow-dark: 0 0 0;
 
-    --shadow-soft: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
-    --shadow-card: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
-    --shadow-elevated: 0 8px 24px -6px hsl(0 0% 0% / 0.5);
+    --shadow-neu-sm: 5px 5px 10px rgb(var(--neu-shadow-dark) / 0.5), -5px -5px 10px rgb(var(--neu-shadow-light) / 0.04);
+    --shadow-neu-flat: 9px 9px 16px rgb(var(--neu-shadow-dark) / 0.55), -9px -9px 16px rgb(var(--neu-shadow-light) / 0.05);
+    --shadow-neu-flat-hover: 12px 12px 20px rgb(var(--neu-shadow-dark) / 0.6), -12px -12px 20px rgb(var(--neu-shadow-light) / 0.06);
+    --shadow-neu-inset-sm: inset 3px 3px 6px rgb(var(--neu-shadow-dark) / 0.5), inset -3px -3px 6px rgb(var(--neu-shadow-light) / 0.04);
+    --shadow-neu-inset: inset 6px 6px 10px rgb(var(--neu-shadow-dark) / 0.55), inset -6px -6px 10px rgb(var(--neu-shadow-light) / 0.04);
+    --shadow-neu-inset-deep: inset 10px 10px 20px rgb(var(--neu-shadow-dark) / 0.6), inset -10px -10px 20px rgb(var(--neu-shadow-light) / 0.05);
 
-    --sidebar-background: 30 12% 12%;
-    --sidebar-foreground: 40 20% 90%;
-    --sidebar-primary: 155 35% 50%;
-    --sidebar-primary-foreground: 30 15% 10%;
-    --sidebar-accent: 30 10% 18%;
-    --sidebar-accent-foreground: 40 20% 90%;
-    --sidebar-border: 30 10% 22%;
-    --sidebar-ring: 155 35% 50%;
+    --shadow-soft: var(--shadow-neu-sm);
+    --shadow-card: var(--shadow-neu-flat);
+    --shadow-elevated: var(--shadow-neu-flat-hover);
+    --gradient-warm: hsl(var(--background));
+    --gradient-card: hsl(var(--card));
+    --gradient-primary: hsl(var(--primary));
+
+    --sidebar-background: 219 16% 18%;
+    --sidebar-foreground: 216 22% 91%;
+    --sidebar-primary: 169 36% 54%;
+    --sidebar-primary-foreground: 156 16% 12%;
+    --sidebar-accent: 220 16% 22%;
+    --sidebar-accent-foreground: 216 22% 91%;
+    --sidebar-border: 219 16% 18%;
+    --sidebar-ring: 169 36% 54%;
   }
 }
 
@@ -135,7 +153,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-display font-extrabold tracking-tight;
   }
 }
 
@@ -164,20 +182,29 @@
     box-shadow: var(--shadow-elevated);
   }
 
-  .stock-full {
-    @apply bg-stock-full text-white;
+  /* Neumorphic shadow primitives, for direct use on restyled components */
+  .shadow-neu-sm {
+    box-shadow: var(--shadow-neu-sm);
   }
 
-  .stock-good {
-    @apply bg-stock-good text-white;
+  .shadow-neu-flat {
+    box-shadow: var(--shadow-neu-flat);
   }
 
-  .stock-low {
-    @apply bg-stock-low text-white;
+  .shadow-neu-flat-hover {
+    box-shadow: var(--shadow-neu-flat-hover);
   }
 
-  .stock-empty {
-    @apply bg-stock-empty text-white;
+  .shadow-neu-inset-sm {
+    box-shadow: var(--shadow-neu-inset-sm);
+  }
+
+  .shadow-neu-inset {
+    box-shadow: var(--shadow-neu-inset);
+  }
+
+  .shadow-neu-inset-deep {
+    box-shadow: var(--shadow-neu-inset-deep);
   }
 
   .animate-in {
@@ -215,12 +242,25 @@
     }
   }
 
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
   .animate-slide-up {
     animation: slideUp 0.4s ease-out;
   }
 
   .animate-pulse-soft {
     animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
 
   /* PWA Safe Areas for iOS notch */

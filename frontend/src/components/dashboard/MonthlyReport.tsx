@@ -65,32 +65,28 @@ export function MonthlyStockReport({ items }: MonthlyReportProps) {
             label: 'Items Bought',
             value: report.itemsBought,
             subtext: `RM ${report.totalSpent.toFixed(0)} spent`,
-            color: 'text-blue-500',
-            bg: 'bg-blue-500/10',
+            color: 'text-primary',
         },
         {
             icon: TrendingUp,
             label: 'Items Used',
             value: report.itemsUsed,
             subtext: 'Consumed this month',
-            color: 'text-green-500',
-            bg: 'bg-green-500/10',
+            color: 'text-stock-good',
         },
         {
             icon: Trash2,
             label: 'Expired',
             value: report.itemsExpired,
             subtext: `RM ${report.wasteValue.toFixed(0)} wasted`,
-            color: 'text-red-500',
-            bg: 'bg-red-500/10',
+            color: 'text-stock-expired',
         },
         {
             icon: Award,
             label: 'Health Score',
             value: `${report.healthScore}%`,
             subtext: report.healthScore >= 80 ? 'Excellent!' : report.healthScore >= 50 ? 'Good' : 'Needs improvement',
-            color: report.healthScore >= 80 ? 'text-green-500' : report.healthScore >= 50 ? 'text-amber-500' : 'text-red-500',
-            bg: report.healthScore >= 80 ? 'bg-green-500/10' : report.healthScore >= 50 ? 'bg-amber-500/10' : 'bg-red-500/10',
+            color: report.healthScore >= 80 ? 'text-stock-good' : report.healthScore >= 50 ? 'text-stock-low' : 'text-stock-expired',
         },
     ];
 
@@ -99,14 +95,14 @@ export function MonthlyStockReport({ items }: MonthlyReportProps) {
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                     <Calendar className="h-5 w-5 text-primary" />
-                    <h3 className="font-semibold">Monthly Report</h3>
+                    <h3 className="font-display font-bold">Monthly Report</h3>
                 </div>
                 <span className="text-xs text-muted-foreground">{report.period}</span>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
                 {stats.map((stat) => (
-                    <div key={stat.label} className={`p-3 rounded-lg ${stat.bg}`}>
+                    <div key={stat.label} className="p-3 rounded-2xl shadow-neu-inset-sm">
                         <div className="flex items-center gap-2 mb-1">
                             <stat.icon className={`h-4 w-4 ${stat.color}`} />
                             <span className="text-xs text-muted-foreground">{stat.label}</span>
@@ -118,8 +114,8 @@ export function MonthlyStockReport({ items }: MonthlyReportProps) {
             </div>
 
             {report.healthScore >= 80 && (
-                <div className="mt-4 p-3 bg-green-500/10 rounded-lg text-center">
-                    <p className="text-sm font-medium text-green-600">
+                <div className="mt-4 p-3 rounded-2xl shadow-neu-inset-sm text-center">
+                    <p className="text-sm font-medium text-stock-good">
                         🎉 Great job! You've reduced waste this month.
                     </p>
                 </div>

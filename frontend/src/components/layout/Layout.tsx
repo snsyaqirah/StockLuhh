@@ -22,7 +22,7 @@ export function Layout({ children, hideBottomNav = false, className }: LayoutPro
   const isOnline = useOnlineStatus();
 
   return (
-    <div className="min-h-screen gradient-warm">
+    <div className="min-h-screen bg-background">
       {/* PWA banners */}
       <OfflineBanner />
       <UpdateBanner />

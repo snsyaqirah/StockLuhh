@@ -35,10 +35,8 @@ export default function ExpiryTracker() {
         {/* Stats Overview */}
         <div className="grid grid-cols-3 gap-3 md:gap-4">
           <Card className={cn(
-            "p-3 md:p-4 text-center border transition-all hover:shadow-md",
-            expiredItems.length > 0
-              ? "border-stock-expired/30 bg-stock-expired/5"
-              : "border-border"
+            "p-3 md:p-4 text-center",
+            expiredItems.length > 0 && "bg-stock-expired/5"
           )}>
             <div className="flex justify-center mb-1">
               <AlertCircle className={cn(
@@ -56,10 +54,8 @@ export default function ExpiryTracker() {
           </Card>
 
           <Card className={cn(
-            "p-3 md:p-4 text-center border transition-all hover:shadow-md",
-            criticalItems.length > 0
-              ? "border-stock-empty/30 bg-stock-empty/5"
-              : "border-border"
+            "p-3 md:p-4 text-center",
+            criticalItems.length > 0 && "bg-stock-empty/5"
           )}>
             <div className="flex justify-center mb-1">
               <AlertTriangle className={cn(
@@ -76,7 +72,7 @@ export default function ExpiryTracker() {
             <p className="text-xs md:text-sm text-muted-foreground font-medium">Next 7 Days</p>
           </Card>
 
-          <Card className="p-3 md:p-4 text-center border border-stock-good/30 bg-stock-good/5 transition-all hover:shadow-md">
+          <Card className="p-3 md:p-4 text-center bg-stock-good/5">
             <div className="flex justify-center mb-1">
               <CheckCircle2 className="h-5 w-5 text-stock-good" />
             </div>
@@ -87,7 +83,7 @@ export default function ExpiryTracker() {
 
         {allExpiryItems.length === 0 ? (
           <div className="text-center py-16 animate-fade-in">
-            <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-stock-good/10 mb-6 shadow-inner">
+            <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-stock-good/10 mb-6 shadow-neu-inset">
               <Calendar className="h-10 w-10 text-stock-good" />
             </div>
             <h3 className="text-xl font-semibold">Everything looks fresh!</h3>
@@ -108,7 +104,7 @@ export default function ExpiryTracker() {
                   {expiredItems.map((item) => {
                     const urgency = getExpiryUrgency(item.expiryDate);
                     return (
-                      <div key={item.id} className="relative group p-4 border border-stock-expired/30 bg-stock-expired/5 rounded-xl transition-all hover:shadow-md flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                      <div key={item.id} className="relative group p-4 bg-stock-expired/5 rounded-[2rem] shadow-neu-flat hover:shadow-neu-flat-hover transition-all duration-300 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <div className="bg-stock-expired text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Expired</div>
@@ -122,7 +118,7 @@ export default function ExpiryTracker() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="flex-1 sm:flex-none border-stock-expired/50 text-stock-expired hover:bg-stock-expired/10 hover:text-stock-expired h-9"
+                            className="flex-1 sm:flex-none text-stock-expired hover:text-stock-expired h-9"
                             onClick={() => {
                               if (confirm(`Confirm you discarded ${item.name}? This will remove it from inventory.`)) {
                                 deleteItem(item.id);
@@ -169,13 +165,13 @@ export default function ExpiryTracker() {
                     const days = getDaysUntil(item.expiryDate);
                     return (
                       <div key={item.id} className="relative">
-                        <div className="absolute inset-0 bg-stock-empty/5 rounded-xl border border-stock-empty/20 pointer-events-none" />
+                        <div className="absolute inset-0 bg-stock-empty/5 rounded-[2rem] shadow-neu-flat pointer-events-none" />
                         <ItemCard
                           item={item}
                           showActions={true}
-                          className="!border-0 !bg-transparent !shadow-none pl-4"
+                          className="!bg-transparent !shadow-none pl-4"
                         />
-                        <div className="absolute top-4 right-4 bg-stock-empty text-white text-xs px-2 py-1 rounded-full font-bold shadow-sm">
+                        <div className="absolute top-4 right-4 bg-stock-empty text-white text-xs px-2 py-1 rounded-full font-bold shadow-neu-sm">
                           {days === 0 ? 'Expires Today' : `${days} days left`}
                         </div>
                       </div>

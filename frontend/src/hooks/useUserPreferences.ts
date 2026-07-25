@@ -45,7 +45,7 @@ export const MODE_FEATURES = {
 
 export function useUserPreferences() {
     const [preferences, setPreferences] = useLocalStorage<UserPreferences>(
-        'stockee-preferences',
+        'stockluhh-preferences',
         DEFAULT_PREFERENCES
     );
 

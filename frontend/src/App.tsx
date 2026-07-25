@@ -1,5 +1,5 @@
 /**
- * Stockee - Smart Inventory Tracker
+ * StockLuhh - Smart Inventory Tracker
  * Main Application Component
  */
 

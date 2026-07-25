@@ -8,5 +8,4 @@ export * from './Loading';
 export * from './EmptyState';
 export * from './OfflineBanner';
 export * from './InstallBanner';
-export * from './UpdateBanner';
 export * from './FAB';

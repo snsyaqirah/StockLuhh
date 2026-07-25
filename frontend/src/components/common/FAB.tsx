@@ -17,9 +17,9 @@ export function FAB() {
     const longPressTimer = useRef<NodeJS.Timeout | null>(null);
     const isLongPress = useRef(false);
 
-    // Don't show FAB on certain pages
+    // Pages where FAB should be hidden
     const hiddenPaths = ['/inventory'];
-    if (hiddenPaths.includes(location.pathname)) return null;
+    const shouldHide = hiddenPaths.includes(location.pathname);
 
     const handlePressStart = useCallback(() => {
         isLongPress.current = false;
@@ -58,6 +58,8 @@ export function FAB() {
             action: () => navigate('/expiry')
         },
     ];
+
+    if (shouldHide) return null;
 
     return (
         <>

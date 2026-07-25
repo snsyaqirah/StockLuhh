@@ -2,6 +2,6 @@
  * Layout components barrel exports
  */
 
-export * from './Layout';
+export * from './AppShell';
 export * from './Header';
 export * from './BottomNav';

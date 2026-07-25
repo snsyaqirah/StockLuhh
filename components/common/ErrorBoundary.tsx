@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Error Boundary Component
  * Catches React errors and shows a friendly error message
@@ -63,7 +65,7 @@ export class ErrorBoundary extends Component<Props, State> {
                                 Reload Page
                             </Button>
                         </div>
-                        {import.meta.env.DEV && this.state.error && (
+                        {process.env.NODE_ENV === 'development' && this.state.error && (
                             <details className="mt-6 text-left p-4 bg-muted rounded-lg">
                                 <summary className="cursor-pointer text-sm font-medium">
                                     Error Details (Dev Only)

@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cool slate "clay" surface - everything is molded from this one tone */
+    --background: 216 22% 91%;
+    --foreground: 209 15% 28%;
+
+    /* Cards match the page surface - neumorphism never uses a separate white card color */
+    --card: 216 22% 91%;
+    --card-foreground: 209 15% 28%;
+
+    --popover: 216 22% 91%;
+    --popover-foreground: 209 15% 28%;
+
+    /* Teal-green primary - reads as "in stock / healthy" */
+    --primary: 169 33% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 19% 88%;
+    --secondary-foreground: 209 15% 28%;
+
+    --muted: 215 21% 89%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 169 37% 58%;
+    --accent-foreground: 198 22% 15%;
+
+    --destructive: 14 64% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Neumorphism has no borders - shadows define every edge. This matches
+       the surface so any stray `border` utility blends away instead of showing a seam. */
+    --border: 216 22% 91%;
+    --input: 216 22% 91%;
+    --ring: 169 33% 46%;
+
+    --radius: 1.25rem;
+
+    /* Stock status colors */
+    --stock-full: 156 45% 45%;
+    --stock-good: 169 33% 46%;
+    --stock-low: 37 73% 55%;
+    --stock-empty: 14 64% 58%;
+    --stock-expired: 9 53% 50%;
+
+    /* Neumorphic shadow pairs: light source top-left, shadow bottom-right */
+    --neu-shadow-light: 255 255 255;
+    --neu-shadow-dark: 163 177 198;
+
+    --shadow-neu-sm: 5px 5px 10px rgb(var(--neu-shadow-dark) / 0.6), -5px -5px 10px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-flat: 9px 9px 16px rgb(var(--neu-shadow-dark) / 0.6), -9px -9px 16px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-flat-hover: 12px 12px 20px rgb(var(--neu-shadow-dark) / 0.7), -12px -12px 20px rgb(var(--neu-shadow-light) / 0.6);
+    --shadow-neu-inset-sm: inset 3px 3px 6px rgb(var(--neu-shadow-dark) / 0.6), inset -3px -3px 6px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-inset: inset 6px 6px 10px rgb(var(--neu-shadow-dark) / 0.6), inset -6px -6px 10px rgb(var(--neu-shadow-light) / 0.5);
+    --shadow-neu-inset-deep: inset 10px 10px 20px rgb(var(--neu-shadow-dark) / 0.7), inset -10px -10px 20px rgb(var(--neu-shadow-light) / 0.6);
+
+    /* Legacy shadow/gradient names kept so existing utility classes stay flat + neumorphic
+       without having to touch every page that references them */
+    --shadow-soft: var(--shadow-neu-sm);
+    --shadow-card: var(--shadow-neu-flat);
+    --shadow-elevated: var(--shadow-neu-flat-hover);
+    --gradient-warm: hsl(var(--background));
+    --gradient-card: hsl(var(--card));
+    --gradient-primary: hsl(var(--primary));
+
+    --sidebar-background: 216 22% 91%;
+    --sidebar-foreground: 209 15% 28%;
+    --sidebar-primary: 169 33% 46%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 19% 88%;
+    --sidebar-accent-foreground: 209 15% 28%;
+    --sidebar-border: 216 22% 91%;
+    --sidebar-ring: 169 33% 46%;
+  }
+
+  .dark {
+    --background: 219 16% 18%;
+    --foreground: 216 22% 91%;
+
+    --card: 219 16% 18%;
+    --card-foreground: 216 22% 91%;
+
+    --popover: 219 16% 18%;
+    --popover-foreground: 216 22% 91%;
+
+    --primary: 169 36% 54%;
+    --primary-foreground: 156 16% 12%;
+
+    --secondary: 220 16% 22%;
+    --secondary-foreground: 216 22% 91%;
+
+    --muted: 218 16% 24%;
+    --muted-foreground: 218 12% 59%;
+
+    --accent: 169 37% 58%;
+    --accent-foreground: 156 16% 12%;
+
+    --destructive: 13 68% 65%;
+    --destructive-foreground: 156 16% 12%;
+
+    --border: 219 16% 18%;
+    --input: 219 16% 18%;
+    --ring: 169 36% 54%;
+
+    --stock-full: 155 48% 54%;
+    --stock-good: 169 36% 54%;
+    --stock-low: 37 74% 65%;
+    --stock-empty: 13 68% 65%;
+    --stock-expired: 10 61% 58%;
+
+    /* Dark neumorphism: near-black shadow, faint white glow as the "light" side */
+    --neu-shadow-light: 255 255 255;
+    --neu-shadow-dark: 0 0 0;
+
+    --shadow-neu-sm: 5px 5px 10px rgb(var(--neu-shadow-dark) / 0.5), -5px -5px 10px rgb(var(--neu-shadow-light) / 0.04);
+    --shadow-neu-flat: 9px 9px 16px rgb(var(--neu-shadow-dark) / 0.55), -9px -9px 16px rgb(var(--neu-shadow-light) / 0.05);
+    --shadow-neu-flat-hover: 12px 12px 20px rgb(var(--neu-shadow-dark) / 0.6), -12px -12px 20px rgb(var(--neu-shadow-light) / 0.06);
+    --shadow-neu-inset-sm: inset 3px 3px 6px rgb(var(--neu-shadow-dark) / 0.5), inset -3px -3px 6px rgb(var(--neu-shadow-light) / 0.04);
+    --shadow-neu-inset: inset 6px 6px 10px rgb(var(--neu-shadow-dark) / 0.55), inset -6px -6px 10px rgb(var(--neu-shadow-light) / 0.04);
+    --shadow-neu-inset-deep: inset 10px 10px 20px rgb(var(--neu-shadow-dark) / 0.6), inset -10px -10px 20px rgb(var(--neu-shadow-light) / 0.05);
+
+    --shadow-soft: var(--shadow-neu-sm);
+    --shadow-card: var(--shadow-neu-flat);
+    --shadow-elevated: var(--shadow-neu-flat-hover);
+    --gradient-warm: hsl(var(--background));
+    --gradient-card: hsl(var(--card));
+    --gradient-primary: hsl(var(--primary));
+
+    --sidebar-background: 219 16% 18%;
+    --sidebar-foreground: 216 22% 91%;
+    --sidebar-primary: 169 36% 54%;
+    --sidebar-primary-foreground: 156 16% 12%;
+    --sidebar-accent: 220 16% 22%;
+    --sidebar-accent-foreground: 216 22% 91%;
+    --sidebar-border: 219 16% 18%;
+    --sidebar-ring: 169 36% 54%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-extrabold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Neumorphic shadow primitives, for direct use on restyled components */
+  .shadow-neu-sm {
+    box-shadow: var(--shadow-neu-sm);
+  }
+
+  .shadow-neu-flat {
+    box-shadow: var(--shadow-neu-flat);
+  }
+
+  .shadow-neu-flat-hover {
+    box-shadow: var(--shadow-neu-flat-hover);
+  }
+
+  .shadow-neu-inset-sm {
+    box-shadow: var(--shadow-neu-inset-sm);
+  }
+
+  .shadow-neu-inset {
+    box-shadow: var(--shadow-neu-inset);
+  }
+
+  .shadow-neu-inset-deep {
+    box-shadow: var(--shadow-neu-inset-deep);
+  }
+
+  .animate-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* PWA Safe Areas for iOS notch */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pl-safe {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .pr-safe {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Touch optimization for mobile */
+  .touch-none {
+    touch-action: none;
+  }
+
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+
+  /* Prevent text selection on interactive elements */
+  .select-none-touch {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Smooth scrolling container */
+  .scroll-smooth-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* PWA standalone mode adjustments */
+@media all and (display-mode: standalone) {
+  body {
+    /* Prevent pull-to-refresh on iOS */
+    overscroll-behavior-y: contain;
+  }
+}

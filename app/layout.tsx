@@ -4,6 +4,7 @@ import { AppShell } from '@/components/layout/AppShell';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: 'StockLuhh - Smart Inventory Tracker',
   description:
     'Track your household inventory, get low-stock alerts, expiry reminders, and never overbuy again. Your personal stock manager for toiletries, groceries, and more.',
